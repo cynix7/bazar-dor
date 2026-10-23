@@ -16,10 +16,12 @@ const AllProduct = async () => {
     const data = await res.json();
     const product = data.slice(0, 33);
     return (
-        <div className='container mx-auto'>
+        <div className='container mx-auto mt-8'>
 
-            <h2 className='text-xl font-bold'> সব পণ্য</h2>
-            <p>মোট ৩৩টি পণ্য দেখানো হচ্ছে</p>
+            <div className='mb-4'>
+                <h2 className='text-xl font-bold'> সব পণ্য</h2>
+                <p>মোট ৩৩টি পণ্য দেখানো হচ্ছে</p>
+            </div>
 
             <div className='grid grid-cols-3 gap-4'>
                 {

@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import React from 'react';
 interface Product{
     product:{
@@ -15,12 +16,13 @@ interface Product{
 
 const ProductCard = ({product}:Product) => {
     return (
+       <Link href={`/product/${product.id}`}>
         <div className='bg-base-200 rounded-lg p-2'>
             <div className='flex items-center gap-2 m-2'>
                 <h1 className='text-2xl bg-base-300 p-2 rounded-lg'>{product.image}</h1>
                 <div>
                     <h2>{product.nameBn}</h2>
-                    <p>প্রতি কেজি</p>
+                    <p>প্রতি {product.unit}</p>
                 </div>
             </div>
             <div className='m-2'>
@@ -32,6 +34,7 @@ const ProductCard = ({product}:Product) => {
                 
             </div>
         </div>
+       </Link>
     );
 };
 

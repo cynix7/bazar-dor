@@ -16,7 +16,7 @@ const PriceDown = async() => {
     const data= await res.json();
     const priceUp= data.filter((d:Product)=>d.change.dir==="down").sort((a:Product,b:Product)=>a.change.pct-b.change.pct).slice(0,6);
     return (
-        <div className='container mx-auto'>
+        <div className='container mx-auto mt-10'>
             <div className='flex items-center m-4'>
                 <span className='text-green-600'>▼</span>
             <h2 className='text-xl font-bold'> আজ দাম কমেছে</h2>
