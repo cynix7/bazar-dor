@@ -15,7 +15,7 @@ const NavLink =async() => {
     return (
         <div className='flex gap-5 container mx-auto my-4'>
            {
-            data.map((d: Catagory)=>(<Link key={d.id} href={d.slug}> {d.icon}{d.nameBn}</Link>))
+            data.map((d: Catagory)=>(<Link key={d.id} href={`/category/${d.slug}`}> {d.icon}{d.nameBn}</Link>))
            }
         </div>
     );

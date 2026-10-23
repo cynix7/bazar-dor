@@ -1,14 +1,18 @@
-import React from 'react';
-
+interface Market{
+    market:string,
+    division: string,
+    min:number,
+    max:number,
+}
 const page = async ({ params }: { params: Promise<{ productId: string }> }) => {
     const { productId } = await params;
     const res = await fetch(`https://openapi.programming-hero.com/api/bazardor/products/${productId}`);
     const product = await res.json();
     const minPrice = Math.min(
-        ...product.markets.map((market) => market.min)
+        ...product.markets.map((market : Market) => market.min)
     );
     const maxPrice = Math.max(
-        ...product.markets.map((market) => market.max)
+        ...product.markets.map((market : Market) => market.max)
     );
     const avgPrice = (minPrice + maxPrice) / 2;
     return (
@@ -70,7 +74,7 @@ const page = async ({ params }: { params: Promise<{ productId: string }> }) => {
                     <h2>সর্বাধিক</h2>
                     <h2>গড়</h2>
                 </div>
-                {product.markets.map(m=>(<div key={m.market} className='grid grid-cols-5 border border-base-300 p-1 text-xs'>
+                {product.markets.map((m: Market)=>(<div key={m.market} className='grid grid-cols-5 border border-base-300 p-1 text-xs'>
                     <h2>{m.market}</h2>
                     <h2>{m.division}</h2>
                     <h2>{m.min} টাকা</h2>
