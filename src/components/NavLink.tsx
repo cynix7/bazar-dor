@@ -11,7 +11,6 @@ interface Catagory{
 const NavLink =async() => {
     const res=await fetch("https://openapi.programming-hero.com/api/bazardor/categories");
     const data= await res.json();
-    console.log(data);
     return (
         <div className='flex gap-5 container mx-auto my-4'>
            {

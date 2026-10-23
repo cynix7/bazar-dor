@@ -1,6 +1,5 @@
-"use client"
 import Image from 'next/image';
-import Link from 'next/link';
+import UserInfo from './UserInfo';
 
 const Navbar = () => {
     const date=new Date().toLocaleDateString('bn-BD', {
@@ -15,10 +14,8 @@ const Navbar = () => {
                 <p>{date}</p>
             </div>
             </div>
-            <div className='flex gap-4'>
-                <Link href={"/signIn"}><button className='btn'>সাইন ইন</button></Link>
-                <Link href={"/signUp"}><button className='btn btn-success'>সাইন আপ</button></Link>
-            </div>
+            <UserInfo></UserInfo>
+            
         </div>
     );
 };
