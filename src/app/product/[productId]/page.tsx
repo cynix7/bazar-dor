@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 interface Market{
     market:string,
     division: string,
@@ -18,9 +20,9 @@ const page = async ({ params }: { params: Promise<{ productId: string }> }) => {
     return (
         <div className='container mx-auto'>
             <div className='flex items-center gap-2.5 my-8'>
-                <button>হোম</button>
+                <Link href={"/"}><button>হোম</button></Link>
                 <span className='text-xs font-bold'>˃</span>
-                <button>{product.categoryNameBn}</button>
+                <Link href={`/category/${product.category}`}><button>{product.categoryNameBn}</button></Link>
                 <span className='text-xs font-bold'>˃</span>
                 <button>{product.nameBn}</button>
             </div>

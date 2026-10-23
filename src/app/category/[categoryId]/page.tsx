@@ -1,5 +1,16 @@
 import ProductCard from '@/components/ProductCard';
-import React from 'react';
+interface Products{
+        nameBn:string,
+    id:number,
+    image:string,
+    unit: string,
+    today: number,
+    change:{
+        dir: string,
+        pct: number,
+    }
+    }
+
 
 const page = async ({ params }: { params: Promise<{ categoryId: string }> }) => {
     const { categoryId } = await params;
@@ -26,10 +37,10 @@ const page = async ({ params }: { params: Promise<{ categoryId: string }> }) => 
                     </select>
                 </div>
             </div>
-            <h2 className='mb-2'>মোট ৪টি পণ্য দেখানো হচ্ছে</h2>
+            <h2 className='mb-2'>মোট {products.length}টি পণ্য দেখানো হচ্ছে</h2>
            <div className='grid grid-cols-3 gap-4'>
              {
-                products.map(p=>(<ProductCard key={p.id} product={p}></ProductCard>))
+                products.map((p:Products)=>(<ProductCard key={p.id} product={p}></ProductCard>))
             }
            </div>
         </div>
