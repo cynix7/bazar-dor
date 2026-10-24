@@ -1,4 +1,5 @@
 import ProductCard from '@/components/ProductCard';
+import { notFound } from 'next/navigation';
 interface Products{
         nameBn:string,
     id:number,
@@ -17,6 +18,9 @@ const page = async ({ params }: { params: Promise<{ categoryId: string }> }) => 
     const res = await fetch(`https://openapi.programming-hero.com/api/bazardor/products?category=${categoryId}`);
     const products = await res.json();
     const category = products[0];
+    if(!category){
+        notFound();
+    }
     return (
         <div className='container mx-auto my-4'>
             <div className='flex items-center bg-base-100 rounded-xl p-2.5'>

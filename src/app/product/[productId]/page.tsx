@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { notFound } from "next/navigation";
 
 interface Market{
     market:string,
@@ -10,6 +11,10 @@ const page = async ({ params }: { params: Promise<{ productId: string }> }) => {
     const { productId } = await params;
     const res = await fetch(`https://openapi.programming-hero.com/api/bazardor/products/${productId}`);
     const product = await res.json();
+if(!product.id){
+    notFound();
+}
+    
     const minPrice = Math.min(
         ...product.markets.map((market : Market) => market.min)
     );
