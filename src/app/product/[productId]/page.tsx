@@ -25,9 +25,9 @@ if(!product.id){
     return (
         <div className='container mx-auto'>
             <div className='flex items-center gap-2.5 my-8'>
-                <Link href={"/"}><button>হোম</button></Link>
+                <Link href={"/"}><button className="cursor-pointer p-1.5 rounded-lg hover:bg-gray-300">হোম</button></Link>
                 <span className='text-xs font-bold'>˃</span>
-                <Link href={`/category/${product.category}`}><button>{product.categoryNameBn}</button></Link>
+                <Link href={`/category/${product.category}`}><button className="cursor-pointer p-1.5 rounded-lg hover:bg-gray-300">{product.categoryNameBn}</button></Link>
                 <span className='text-xs font-bold'>˃</span>
                 <button>{product.nameBn}</button>
             </div>
@@ -35,16 +35,16 @@ if(!product.id){
                 <div className='flex items-center gap-4'>
                     <h2 className='text-2xl bg-base-300 rounded-lg p-2.5'>{product.image}</h2>
                     <div>
-                        <h2 className='text-2xl font-bold mb-12'>{product.nameBn}</h2>
-                        <p className='pt-6'>প্রতি {product.unit} {product.categoryNameBn}</p>
+                        <h2 className='text-2xl font-bold'>{product.nameBn}</h2>
+                        <p className='mb-2 text-gray-500'>প্রতি {product.unit} {product.categoryNameBn}</p>
                         {product.change.dir === "up" ? <p>গতকালের তুলনায় আজ দাম বেড়েছে · {product.today - product.yesterday} টাকা</p> : product.change.dir === "down" ? <p>গতকালের তুলনায় আজ দাম কমেছে  · {product.yesterday - product.today} টাকা</p> : <p>গতকালের তুলনায় আজ দাম একই রয়েছে </p>}
                     </div>
                 </div>
                 <div className='bg-base-300 p-2.5 text-center rounded-lg'>
-                    <h2>আজকের দাম</h2>
-                    <p>{product.today}</p>
-                    <p>টাকা / {product.unit}</p>
-                    <p>▲ {product.change.pct}%</p>
+                    <h2 className="text-gray-500">আজকের দাম</h2>
+                    <p className="text-xl font-bold">{product.today}</p>
+                    <p className="text-gray-500">টাকা / {product.unit}</p>
+                    {product.change.dir==="up"?<p className="text-red-600">▲ {product.change.pct}%</p>:product.change.dir==="down"?<p className="text-green-600">▼ {Math.abs(product.change.pct)}%</p>:<p>— ০.০%</p>}
                 </div>
             </div>
             <div className='bg-base-100 my-6 p-4 rounded-2xl'>
@@ -74,7 +74,7 @@ if(!product.id){
                 </div>
                 <h2 className='py-4 font-semibold'>বাজারভিত্তিক আজকের দাম</h2>
             <div>
-                <div className='grid grid-cols-5 border border-base-300 p-1 text-xs'>
+                <div className='grid grid-cols-5 border border-base-300 p-1 text-xs text-gray-500 font-bold'>
                     <h2>বাজার</h2>
                     <h2>বিভাগ</h2>
                     <h2>সর্বনিম্ন</h2>

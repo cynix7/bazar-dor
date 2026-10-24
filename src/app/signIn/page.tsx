@@ -2,6 +2,7 @@
 import { authClient } from '@/lib/auth-client';
 import Link from 'next/link';
 import React from 'react';
+import toast from 'react-hot-toast';
 
 const signInPage = () => {
     const onSubmit = async (e: React.SubmitEvent<HTMLElement>) => {
@@ -13,21 +14,33 @@ const signInPage = () => {
             callbackURL: "/"
         });
         if (data) {
-            console.log(data);
+            toast.success("Logged in Successfully")
         }
         if (error) {
-            console.log(error);
+            toast.error(error.message as string);
         }
     }
     const googleSignIn = async () => {
-        const data = await authClient.signIn.social({
+        const {data,error} = await authClient.signIn.social({
             provider: "google",
         });
+        if (data) {
+            toast.success("Logged in Successfully")
+        }
+        if (error) {
+            toast.error(error.message as string);
+        }
     };
     const githubSignIn = async () => {
-        const data = await authClient.signIn.social({
+        const {data,error} = await authClient.signIn.social({
             provider: "github",
         });
+        if (data) {
+            toast.success("Logged in Successfully")
+        }
+        if (error) {
+            toast.error(error.message as string);
+        }
     };
     return (
         <div className='m-8'>

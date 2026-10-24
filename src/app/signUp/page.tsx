@@ -2,39 +2,53 @@
 import { authClient } from '@/lib/auth-client';
 import Link from 'next/link';
 import { redirect } from 'next/navigation';
+import toast from 'react-hot-toast';
 const signUpPage = () => {
 
-    const onSubmit=async(e:React.SubmitEvent<HTMLElement>)=>{
+    const onSubmit = async (e: React.SubmitEvent<HTMLElement>) => {
         e.preventDefault();
-        const formData=new FormData(e.target);
-        const user= Object.fromEntries(formData.entries()) as {name:string, email:string,password:string, };
-        const{data,error}= await authClient.signUp.email({
+        const formData = new FormData(e.target);
+        const user = Object.fromEntries(formData.entries()) as { name: string, email: string, password: string, };
+        const { data, error } = await authClient.signUp.email({
             ...user,
-            callbackURL:"/"
+            callbackURL: "/"
         });
-        if(data){
-            console.log(data);
+
+        if (data) {
             redirect("/");
+            toast.success("Logged in Successfully")
         }
-        if(error){
-            console.log(error);
+        if (error) {
+            toast.error(error.message as string);
         }
     }
     const googleSignIn = async () => {
-            const data = await authClient.signIn.social({
-                provider: "google",
-            });
-        };
-        const githubSignIn = async () => {
-            const data = await authClient.signIn.social({
-                provider: "github",
-            });
-        };
+        const { data, error } = await authClient.signIn.social({
+            provider: "google",
+        });
+        if (data) {
+            toast.success("Logged in Successfully")
+        }
+        if (error) {
+            toast.error(error.message as string);
+        }
+    };
+    const githubSignIn = async () => {
+        const { data, error } = await authClient.signIn.social({
+            provider: "github",
+        });
+        if (data) {
+            toast.success("Logged in Successfully")
+        }
+        if (error) {
+            toast.error(error.message as string);
+        }
+    };
     return (
         <div className='m-8'>
             <form onSubmit={onSubmit} className='flex flex-col justify-center items-center'>
                 <h2 className='text-xl font-bold'>অ্যাকাউন্ট তৈরি করুন</h2>
-                    <p className='text-xs'>বিনা খরচে সাইন আপ করে সব বিস্তারিত দাম দেখুন।</p>
+                <p className='text-xs'>বিনা খরচে সাইন আপ করে সব বিস্তারিত দাম দেখুন।</p>
 
                 <fieldset className="fieldset bg-base-200 border-base-300 rounded-box w-xs border p-4 mt-4">
                     <label className="label">নাম</label>

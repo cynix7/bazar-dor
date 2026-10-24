@@ -17,7 +17,7 @@ interface Product{
 const ProductCard = ({product}:Product) => {
     return (
        <Link href={`/product/${product.id}`}>
-        <div className='bg-base-200 rounded-lg p-2'>
+        <div className='bg-base-200 rounded-lg p-2 hover:border border-green-600'>
             <div className='flex items-center gap-2 m-2'>
                 <h1 className='text-2xl bg-base-300 p-2 rounded-lg'>{product.image}</h1>
                 <div>
@@ -29,7 +29,7 @@ const ProductCard = ({product}:Product) => {
                 <h2>আজকের দাম</h2>
                 <div className='flex  justify-between'>
                     <p><span className='text-xl font-bold'>{product.today}</span> টাকা</p>
-                    <p className='bg-base-300 rounded-4xl py-1 px-2 text-red-600 text-xs'>▲ {product.change.pct}%</p>
+                    {product.change.dir==="up"?<p className='bg-base-300 rounded-4xl py-1 px-2 text-red-600 text-xs'>▲ {product.change.pct}%</p> :product.change.dir==="down" ?<p className='bg-base-300 rounded-4xl py-1 px-2 text-green-600 text-xs'>▼ {Math.abs(product.change.pct)}%</p> : <p className='bg-base-300 rounded-4xl py-1 px-2 text-xs'>— ০.০%</p>}
                 </div>
                 
             </div>

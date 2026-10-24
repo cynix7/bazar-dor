@@ -19,7 +19,7 @@ const AllProduct = async () => {
         <div className='container mx-auto mt-8'>
 
             <div className='mb-4'>
-                <h2 className='text-xl font-bold'> সব পণ্য</h2>
+                <h2 id='product' className='text-xl font-bold'> সব পণ্য</h2>
                 <p>মোট ৩৩টি পণ্য দেখানো হচ্ছে</p>
             </div>
 
