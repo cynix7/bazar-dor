@@ -1,5 +1,6 @@
 "use client"
 import { authClient } from '@/lib/auth-client';
+import Link from 'next/link';
 import { redirect } from 'next/navigation';
 const signUpPage = () => {
 
@@ -19,6 +20,16 @@ const signUpPage = () => {
             console.log(error);
         }
     }
+    const googleSignIn = async () => {
+            const data = await authClient.signIn.social({
+                provider: "google",
+            });
+        };
+        const githubSignIn = async () => {
+            const data = await authClient.signIn.social({
+                provider: "github",
+            });
+        };
     return (
         <div className='m-8'>
             <form onSubmit={onSubmit} className='flex flex-col justify-center items-center'>
@@ -39,8 +50,15 @@ const signUpPage = () => {
                     <input name='repeated-pass' type="password" className="input" placeholder="আবার লিখুন" />
 
                     <button type="submit" className="btn bg-green-600 mt-4 text-white">অ্যাকাউন্ট তৈরি করুন</button>
+                    <p className='text-center'>অথবা</p>
+                    <div className='flex gap-2 justify-center'>
+                        <button onClick={googleSignIn} className='btn btn-xs'>Google দিয়ে চালিয়ে যান</button>
+                        <button onClick={githubSignIn} className='btn btn-xs'>GitHub দিয়ে চালিয়ে যান</button>
+                    </div>
+                    <p className='text-center m-2'>অ্যাকাউন্ট আছে? <Link href={"/signIn"} className='text-green-600'> সাইন ইন করুন</Link></p>
                 </fieldset>
             </form>
+            <Link href={"/"}><p className='text-xs font-semibold text-center text-gray-500 mt-6'>← হোম পেজে ফিরে যান</p></Link>
         </div>
     );
 };
