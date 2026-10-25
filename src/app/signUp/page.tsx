@@ -9,10 +9,6 @@ const signUpPage = () => {
         e.preventDefault();
         const formData = new FormData(e.target);
         const user = Object.fromEntries(formData.entries()) as { name: string, email: string, password: string, repeatedPass: string };
-        const { data, error } = await authClient.signUp.email({
-            ...user,
-            callbackURL: "/"
-        });
         if (user.repeatedPass.length === 0 || user.password.length===0) {
             toast.error("পাসওয়ার্ড নিশ্চিত করুন!");
             return;
@@ -21,7 +17,15 @@ const signUpPage = () => {
             toast.error("দুটি পাসওয়ার্ড মিলছে না!");
             return;
         }
-
+        if (!user.name.trim() || !user.email.trim() || !user.password || !user.repeatedPass) {
+        toast.error("সব তথ্য পূরণ করুন!");
+        return;
+    }
+        const { data, error } = await authClient.signUp.email({
+            ...user,
+            callbackURL: "/"
+        });
+        
         if (data) {
             toast.success("সফলভাবে সাইন আপ হয়েছে!")
             redirect("/");
