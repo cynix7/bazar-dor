@@ -1,22 +1,10 @@
-import Link from 'next/link';
-import React from 'react';
-
-interface Catagory{
-    id: string,
-    slug: string,
-    nameBn: string,
-    icon: string
-}
+import CategoryLinks from './CategoryLinks';
 
 const NavLink =async() => {
     const res=await fetch("https://openapi.programming-hero.com/api/bazardor/categories");
     const data= await res.json();
     return (
-        <div className='flex gap-5 container mx-auto my-4'>
-           {
-            data.map((d: Catagory)=>(<Link key={d.id} href={`/category/${d.slug}`} className='p-1.5 rounded-lg hover:bg-gray-300'> {d.icon}{d.nameBn}</Link>))
-           }
-        </div>
+        <CategoryLinks data={data}></CategoryLinks>
     );
 };
 

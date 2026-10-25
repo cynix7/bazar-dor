@@ -49,7 +49,7 @@ if(!product.id){
             </div>
             <div className='bg-base-100 my-6 p-4 rounded-2xl'>
                 <h2 className='font-semibold mb-2.5'>দামের সারসংক্ষেপ</h2>
-                <div className='grid grid-cols-3 gap-4'>
+                <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4'>
                     <div className='bg-base-200 border border-base-300 rounded-xl'>
                         <div className='p-2.5'>
                             <p>সর্বনিম্ন দাম</p>

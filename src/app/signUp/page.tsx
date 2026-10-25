@@ -8,41 +8,37 @@ const signUpPage = () => {
     const onSubmit = async (e: React.SubmitEvent<HTMLElement>) => {
         e.preventDefault();
         const formData = new FormData(e.target);
-        const user = Object.fromEntries(formData.entries()) as { name: string, email: string, password: string, };
+        const user = Object.fromEntries(formData.entries()) as { name: string, email: string, password: string, repeatedPass: string };
         const { data, error } = await authClient.signUp.email({
             ...user,
             callbackURL: "/"
         });
+        if (user.repeatedPass.length === 0 || user.password.length===0) {
+            toast.error("পাসওয়ার্ড নিশ্চিত করুন!");
+            return;
+        }
+        if (user.password !== user.repeatedPass) {
+            toast.error("দুটি পাসওয়ার্ড মিলছে না!");
+            return;
+        }
 
         if (data) {
+            toast.success("সফলভাবে সাইন আপ হয়েছে!")
             redirect("/");
-            toast.success("Logged in Successfully")
         }
         if (error) {
             toast.error(error.message as string);
         }
     }
     const googleSignIn = async () => {
-        const { data, error } = await authClient.signIn.social({
+        await authClient.signIn.social({
             provider: "google",
         });
-        if (data) {
-            toast.success("Logged in Successfully")
-        }
-        if (error) {
-            toast.error(error.message as string);
-        }
     };
     const githubSignIn = async () => {
-        const { data, error } = await authClient.signIn.social({
+        await authClient.signIn.social({
             provider: "github",
         });
-        if (data) {
-            toast.success("Logged in Successfully")
-        }
-        if (error) {
-            toast.error(error.message as string);
-        }
     };
     return (
         <div className='m-8'>
@@ -52,22 +48,22 @@ const signUpPage = () => {
 
                 <fieldset className="fieldset bg-base-200 border-base-300 rounded-box w-xs border p-4 mt-4">
                     <label className="label">নাম</label>
-                    <input name='name' type="text" className="input" placeholder="যেমন: রহিম উদ্দিন" />
+                    <input name='name' type="text" className="input" placeholder="যেমন: রহিম উদ্দিন" required />
 
                     <label className="label">ইমেইল</label>
-                    <input name='email' type="email" className="input" placeholder="you@example.com" />
+                    <input name='email' type="email" className="input" placeholder="you@example.com" required />
 
                     <label className="label">পাসওয়ার্ড</label>
                     <input name='password' type="password" className="input" placeholder="কমপক্ষে ৮ অক্ষর" />
 
                     <label className="label">পাসওয়ার্ড নিশ্চিত করুন</label>
-                    <input name='repeated-pass' type="password" className="input" placeholder="আবার লিখুন" />
+                    <input name='repeatedPass' type="password" className="input" placeholder="আবার লিখুন" />
 
                     <button type="submit" className="btn bg-green-600 mt-4 text-white">অ্যাকাউন্ট তৈরি করুন</button>
                     <p className='text-center'>অথবা</p>
                     <div className='flex gap-2 justify-center'>
-                        <button onClick={googleSignIn} className='btn btn-xs'>Google দিয়ে চালিয়ে যান</button>
-                        <button onClick={githubSignIn} className='btn btn-xs'>GitHub দিয়ে চালিয়ে যান</button>
+                        <button type='button' onClick={googleSignIn} className='btn btn-xs'>Google দিয়ে চালিয়ে যান</button>
+                        <button type='button' onClick={githubSignIn} className='btn btn-xs'>GitHub দিয়ে চালিয়ে যান</button>
                     </div>
                     <p className='text-center m-2'>অ্যাকাউন্ট আছে? <Link href={"/signIn"} className='text-green-600'> সাইন ইন করুন</Link></p>
                 </fieldset>

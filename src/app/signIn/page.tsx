@@ -14,33 +14,21 @@ const signInPage = () => {
             callbackURL: "/"
         });
         if (data) {
-            toast.success("Logged in Successfully")
+            toast.success("সফলভাবে সাইন ইন হয়েছে!")
         }
         if (error) {
             toast.error(error.message as string);
         }
     }
     const googleSignIn = async () => {
-        const {data,error} = await authClient.signIn.social({
+        await authClient.signIn.social({
             provider: "google",
         });
-        if (data) {
-            toast.success("Logged in Successfully")
-        }
-        if (error) {
-            toast.error(error.message as string);
-        }
     };
     const githubSignIn = async () => {
-        const {data,error} = await authClient.signIn.social({
+        await authClient.signIn.social({
             provider: "github",
         });
-        if (data) {
-            toast.success("Logged in Successfully")
-        }
-        if (error) {
-            toast.error(error.message as string);
-        }
     };
     return (
         <div className='m-8'>
@@ -59,8 +47,8 @@ const signInPage = () => {
                     <button type='submit' className="btn bg-green-600 mt-4 text-white">সাইন ইন</button>
                     <p className='text-center'>অথবা</p>
                     <div className='flex gap-2 justify-center'>
-                        <button onClick={googleSignIn} className='btn btn-xs'>Google দিয়ে চালিয়ে যান</button>
-                        <button onClick={githubSignIn} className='btn btn-xs'>GitHub দিয়ে চালিয়ে যান</button>
+                        <button type='button' onClick={googleSignIn} className='btn btn-xs'>Google দিয়ে চালিয়ে যান</button>
+                        <button type='button' onClick={githubSignIn} className='btn btn-xs'>GitHub দিয়ে চালিয়ে যান</button>
                     </div>
                     <p className='text-center m-2'>অ্যাকাউন্ট নেই? <Link href={"/signUp"} className='text-green-600'>সাইন আপ করুন</Link></p>
                 </fieldset>

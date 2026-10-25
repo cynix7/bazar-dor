@@ -23,7 +23,7 @@ const AllProduct = async () => {
                 <p>মোট ৩৩টি পণ্য দেখানো হচ্ছে</p>
             </div>
 
-            <div className='grid grid-cols-3 gap-4'>
+            <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4'>
                 {
                     product.map((product: Product) => (<ProductCard key={product.id} product={product}></ProductCard>))
                 }
