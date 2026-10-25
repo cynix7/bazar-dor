@@ -1,3 +1,4 @@
+import { cacheLife } from "next/cache";
 import MarqueeText from "react-marquee-text"
 import "react-marquee-text/dist/styles.css"
 interface Headline{
@@ -13,6 +14,8 @@ interface Headline{
 }
 
 const Marquee = async() => {
+    "use cache";
+    cacheLife("hours");
     const res=await fetch("https://openapi.programming-hero.com/api/bazardor/products");
     const data = await res.json();
     return (
